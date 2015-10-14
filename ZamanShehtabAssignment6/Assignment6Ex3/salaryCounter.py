@@ -4,6 +4,31 @@
 #CA: Nuri Ra
 #Assignment 6: Problem 3
 
+'''
+Analysis
+
+The purpose of this program is to calculate how a single penny grows over 
+a given number of days, if it is doubled every day. 
+
+Output to monitor:
+  table of day and the current salary corresponding to that day.
+  horizontalPrintLine() prints a horizontal line equal to the screen length  
+  finalAmount (float) - The total salary after the given number of days.
+
+
+Input from keyboard:
+  numOfDaysInt (int) - The number of days to calculate the salary for. 
+
+Tasks allocated to Functions: 
+  errorCheck(string) - returns a string if invalid input or empty string and
+                       the int value of the input if valid input 
+  pennyCalculator(int, int) - returns a list containing the current day and
+                              its corresponding salary value. 
+  horizontalPrintLine() - returns a string that creates a dashed line on 
+                          the monitor
+
+'''
+
 DOLLAR_CONVERTER = 100
 LINE_LENGTH = 105
 DOUBLE = 2
@@ -17,13 +42,15 @@ def errorCheck(stringInput):
   try:
     intResult = int(stringInput)
     if intResult <=0:
-      #print("This program only takes in natural number values. Please try again")
+      #print("This program only takes in natural number values.\
+      # Please try again")
       errorMessage = "Invalid"
   except ValueError:
     if stringInput =='':
       errorMessage = "Close"
     else:
-      #print("This program only takes in natural number values. Please try again")
+      #print("This program only takes in natural number values.\
+      # Please try again")
       errorMessage = "Invalid"
   #print (errorMessage)
   return (errorMessage or intResult)
