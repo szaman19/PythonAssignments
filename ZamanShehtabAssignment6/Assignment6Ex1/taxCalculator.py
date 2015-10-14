@@ -2,7 +2,7 @@
 #szaman5@binghamton.edu
 #Lab Section: B55
 #CA: Nuri Ra
-#Assignment 5: Problem 1
+#Assignment 6: Problem 3
 
 '''
 The assignment goal was to create a program that is able to calculate the taxes
@@ -129,33 +129,36 @@ def computeTax(statusString, taxedIncome):
     
   
 def main():
-  '''maritalStatus = input("What is your marital status? ")
+  maritalStatus = input("What is your marital status? ")
   taxableIncome = input("What is your taxable income? ")
+  
   while(maritalStatus and taxableIncome):
     
     taxableIncomeFloat = float(taxableIncome)
     print("%s, $%.2f = $%.2f" % \
      (maritalStatus,taxableIncomeFloat, computeTax(maritalStatus,taxableIncomeFloat))) 
     print('\n')
+    
     maritalStatus = input("What is your marital status? ")
     taxableIncome = input("What is your taxable income? ")
-  '''
+
   
-  states = ['single', 'married']
+  
+  # states = ['single', 'married']
 
-  incomes = [[0,9075, 9076, 36900, 36901, 89350, 89351,
+  # incomes = [[0,9075, 9076, 36900, 36901, 89350, 89351,
 
-              186350, 186351, 405100, 405101, 406750, 406751],
+  #             186350, 186351, 405100, 405101, 406750, 406751],
 
-             [0, 18150, 18151, 73800, 73801, 148850, 148851,
+  #            [0, 18150, 18151, 73800, 73801, 148850, 148851,
 
-             226850, 226851,  405100, 405101, 457600, 457601]]
+  #            226850, 226851,  405100, 405101, 457600, 457601]]
 
-  for i in range(len(states)):
+  # for i in range(len(states)):
 
-    for j in range(len(incomes[0])):
+  #   for j in range(len(incomes[0])):
 
-      print("%s, $%.2f = $%.2f" % (states[i], incomes[i][j], computeTax(states[i], incomes[i][j])))
+  #     print("%s, $%.2f = $%.2f" % (states[i], incomes[i][j], computeTax(states[i], incomes[i][j])))
 
 
   
