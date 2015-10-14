@@ -126,11 +126,26 @@ def computeTax(statusString, taxedIncome):
                  (taxedIncome-SINGLE_TAX_BRACKET_SIX,BRACKET_SEVEN_RATE)
       
   return totalTax
-    
+def errorCheckMaritalStatus(maritalStatusString):
+  return maritalStatusString.lower()=="married" or maritalStatusString.lower()=="single"
+
+def errorCheckTaxableIncome(taxableIncomeString):
+  return not taxableIncomeString or float(taxableIncomeString)>0
   
 def main():
-  maritalStatus = input("What is your marital status? ")
-  taxableIncome = input("What is your taxable income? ")
+  maritalStatus = input("What is your marital status? or <Enter to quit>")
+  taxableIncome = ""
+  while maritalStatus and not taxableIncome:
+    while not errorCheckMaritalStatus(maritalStatus):
+      print("Invalid marital status: Use single or married")
+      maritalStatus = input("What is your marital status? or <Enter to quit>")
+        
+    taxableIncome = input("What is your taxable income? ")
+    while not errorCheckTaxableIncome(taxableIncome):
+      print("Invalid income. Use number greater than 0")
+      taxableIncome = input("What is your taxable income? ")
+
+      
   
   while(maritalStatus and taxableIncome):
     
@@ -139,8 +154,17 @@ def main():
      (maritalStatus,taxableIncomeFloat, computeTax(maritalStatus,taxableIncomeFloat))) 
     print('\n')
     
-    maritalStatus = input("What is your marital status? ")
-    taxableIncome = input("What is your taxable income? ")
+    maritalStatus = input("What is your marital status? or <Enter to quit>")
+    taxableIncome = ""
+    while maritalStatus and not taxableIncome:
+      while not errorCheckMaritalStatus(maritalStatus):
+        print("Invalid marital status: Use single or married")
+        maritalStatus = input("What is your marital status? or <Enter to quit>")
+          
+      taxableIncome = input("What is your taxable income? ")
+      while not errorCheckTaxableIncome(taxableIncome):
+        print("Invalid income. Use number greater than 0")
+        taxableIncome = input("What is your taxable income? ")
 
   
   
