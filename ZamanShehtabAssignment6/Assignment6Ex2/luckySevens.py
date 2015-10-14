@@ -17,7 +17,7 @@ def runGame(startingMoney, turnNum,currentMax,currentMaxTurn):
   if(dieValue == 7):
     moneyLeft += 4
     turn += 1
-    if(moneyLeft > maximum):
+    if isMax(maximum,moneyLeft):
       maximum = moneyLeft
       maxTurn = turn    
     #print('{0:5d} {1:4d} {2:7d}'.format(turn,dieValue,moneyLeft))
@@ -26,24 +26,34 @@ def runGame(startingMoney, turnNum,currentMax,currentMaxTurn):
     turn +=1
     #print('{0:5d} {1:4d} {2:7d}'.format(turn,dieValue,moneyLeft))
   return [turn,dieValue,moneyLeft,maxTurn,maximum]
+def isBool(unknownInput):
+  return type(unknownInput) == bool
 
 def errorCheck(stringInput):
   try:
     intResult = int(stringInput)
   except ValueError:
     if stringInput =='':
-      intResult = False
+      intResult = True
     else:
-      print("This program only takes in whole number values. Please try again")
-      retry = input("Please place your bet in whole dollars: OR press <Enter> to quit:  ")
-      intResult = errorCheck(retry)
+      #print("This program only takes in whole number values. Please try again")
+      intResult = False
   return intResult
 
 def main():
-  potSizeStr = input("Please place your bet in whole dollars: OR press <Enter> to quit:  ")
+  inputMessage = "Please place your bet in whole dollars: OR press <Enter> to quit:  "
+  errorMessage = "This program only takes in whole number values. Please try again"
+  potSizeStr = input(inputMessage)
   potSizeIntErrorChecked = errorCheck(potSizeStr)
   
-  
+  while not potSizeIntErrorChecked:
+    print(errorMessage)
+    potSizeStr = input(inputMessage)
+    potSizeIntErrorChecked = errorCheck(potSizeStr)
+
+  if isBool(potSizeIntErrorChecked):
+    potSizeIntErrorChecked = False
+
   while(potSizeIntErrorChecked):
     
     print('{0:5} {1:5} {2:8}'.format("Roll","Value","Dollars"))
@@ -66,7 +76,15 @@ def main():
     print("You became broke after ",turn," rolls")
     print("You should have quit after",maxTurn," rolls when you had",maxOutput)				
     
-    potSizeStr = input("Please place your bet in whole dollars: OR press <Enter> to quit:  ")
+    potSizeStr = input(inputMessage)
     potSizeIntErrorChecked = errorCheck(potSizeStr)
+
+    while not potSizeIntErrorChecked:
+      print(errorMessage)
+      potSizeStr = input(inputMessage)
+      potSizeIntErrorChecked = errorCheck(potSizeStr)
+
+    if isBool(potSizeIntErrorChecked):
+      potSizeIntErrorChecked = False
 
 main()
