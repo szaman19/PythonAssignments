@@ -38,27 +38,25 @@ INDEX_OF_DAY = 0
 INDEX_OF_PAY = 1
 
 def errorCheck(stringInput):
-  errorMessage=""
   try:
     intResult = int(stringInput)
     if intResult <=0:
       #print("This program only takes in natural number values.\
       # Please try again")
-      errorMessage = "Invalid"
+      intResult = False
   except ValueError:
-    if stringInput =='':
-      errorMessage = "Close"
-    else:
-      #print("This program only takes in natural number values.\
-      # Please try again")
-      errorMessage = "Invalid"
+      intResult = False
   #print (errorMessage)
-  return (errorMessage or intResult)
+  return intResult
 
 def pennyCalculator(numDay, currentPennyVal):
   day = numDay + INCREMENT
   pennyVal = currentPennyVal * DOUBLE
   return [day,pennyVal]
+
+def centToDollar(cents):
+  dollars = cents / DOLLAR_CONVERTER
+  return dollars
 
 def horizontalPrintLine():
   line = ""
@@ -74,18 +72,16 @@ def main():
 
   numOfDaysStr = input(inputMessage)
 
-  numOfDaysErrorCheckedInt = errorCheck(numOfDaysStr)
   
-  while numOfDaysErrorCheckedInt == "Invalid":
-    print(invalidInputMessage)
-    numOfDaysStr = input(inputMessage)
+  while numOfDaysStr:
     numOfDaysErrorCheckedInt = errorCheck(numOfDaysStr)
-
-  if numOfDaysErrorCheckedInt == "Close":
-    numOfDaysErrorCheckedInt = False
-    
   
-  while numOfDaysErrorCheckedInt:
+    while not numOfDaysErrorCheckedInt:
+      print(invalidInputMessage)
+      numOfDaysStr = input(inputMessage)
+      numOfDaysErrorCheckedInt = errorCheck(numOfDaysStr)
+
+
     day = INITIAL_STAGE_ONE
     pay = INITIAL_STAGE_ONE
     totalPay = INITIAL_STAGE_ONE
@@ -101,23 +97,17 @@ def main():
       totalPay += pay
       print("{0:4} {1:100}".format(day,pay))
 
-    finalAmount = totalPay / DOLLAR_CONVERTER
+    finalAmount = centToDollar(totalPay)
+
     print(horizontalPrintLine())
     print("In ",numOfDaysErrorCheckedInt,"days a penny grows to $",\
       "{:.2f}".format(finalAmount))
     print(horizontalPrintLine())
+    
     numOfDaysStr = input(inputMessage)
 
-    numOfDaysErrorCheckedInt = errorCheck(numOfDaysStr)
     
-    while numOfDaysErrorCheckedInt == "Invalid":
-      print(invalidInputMessage)
-      numOfDaysStr = input(inputMessage)
-      numOfDaysErrorCheckedInt = errorCheck(numOfDaysStr)
-   
-    if numOfDaysErrorCheckedInt == "Close":
-      numOfDaysErrorCheckedInt = False
-      
+
   # Custom tester according to output given on blackboard
   # tester1 = [4,14,30,365]
   # tester2 = [0.15,163.83,10737418.23,751533626487626648569070089221\

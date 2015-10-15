@@ -130,41 +130,37 @@ def errorCheckMaritalStatus(maritalStatusString):
   return maritalStatusString.lower()=="married" or maritalStatusString.lower()=="single"
 
 def errorCheckTaxableIncome(taxableIncomeString):
-  return not taxableIncomeString or float(taxableIncomeString)>0
+  try:
+    floatResult = float(taxableIncomeString)
+  except ValueError:
+    floatResult = False
+  return floatResult < 0 or floatResult
+
   
 def main():
   maritalStatus = input("What is your marital status? or <Enter to quit>")
-  taxableIncome = ""
-  while maritalStatus and not taxableIncome:
+
+  
+  while maritalStatus:
+
     while not errorCheckMaritalStatus(maritalStatus):
       print("Invalid marital status: Use single or married")
       maritalStatus = input("What is your marital status? or <Enter to quit>")
         
     taxableIncome = input("What is your taxable income? ")
-    while not errorCheckTaxableIncome(taxableIncome):
+    
+    errorCheckedTaxableIncome = errorCheckTaxableIncome(taxableIncome)
+    
+    while not errorCheckedTaxableIncome:
       print("Invalid income. Use number greater than 0")
       taxableIncome = input("What is your taxable income? ")
+      errorCheckedTaxableIncome = errorCheckTaxableIncome(taxableIncome)
 
-      
-  
-  while(maritalStatus and taxableIncome):
-    
-    taxableIncomeFloat = float(taxableIncome)
     print("%s, $%.2f = $%.2f" % \
-     (maritalStatus,taxableIncomeFloat, computeTax(maritalStatus,taxableIncomeFloat))) 
+     (maritalStatus,errorCheckedTaxableIncome, computeTax(maritalStatus,errorCheckedTaxableIncome))) 
     print('\n')
     
     maritalStatus = input("What is your marital status? or <Enter to quit>")
-    taxableIncome = ""
-    while maritalStatus and not taxableIncome:
-      while not errorCheckMaritalStatus(maritalStatus):
-        print("Invalid marital status: Use single or married")
-        maritalStatus = input("What is your marital status? or <Enter to quit>")
-          
-      taxableIncome = input("What is your taxable income? ")
-      while not errorCheckTaxableIncome(taxableIncome):
-        print("Invalid income. Use number greater than 0")
-        taxableIncome = input("What is your taxable income? ")
 
   
   

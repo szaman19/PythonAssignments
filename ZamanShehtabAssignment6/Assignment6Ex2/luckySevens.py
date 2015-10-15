@@ -75,10 +75,6 @@ def errorCheck(stringInput):
   try:
     intResult = int(stringInput)
   except ValueError:
-    # if stringInput =='':
-    #   intResult = "Close"
-    # else:
-    #   #print("This program only takes in whole number values. Please try again")
       intResult = False
   return intResult
 
@@ -93,9 +89,6 @@ def main():
   errorMessage = "This program only takes in whole number values. Please try again"
   
   potSizeStr = input(inputMessage)
-  
-  
-
 
   while(potSizeStr):
 
