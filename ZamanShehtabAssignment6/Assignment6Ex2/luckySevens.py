@@ -5,7 +5,8 @@
 #Assignment 6: Problem 2
 '''
 
-Restate the problem
+Analysis
+
 
 (Note:  only list categories that apply)
 
@@ -39,11 +40,12 @@ LUCKY_SEVEN_PRIZE = 4
 INCREMENT = 1
 
 INDEX_OF_TURN = 0
-INDEX_OF_DIE_VALUE = 1
+INDEX_OF_DIcE_VALUE = 1
 INDEX_OF_MONEY_LEFT=2
 INDEX_OF_MAX_TURN = 3
 INDEX_OF_MAXIMUM = 4
-def throwDie():
+
+def throwDice():
   dice1 = random.randrange(DICE_MIN,DICE_MAX)
   dice2 = random.randrange(DICE_MIN,DICE_MAX)
   return dice1 + dice2
@@ -56,19 +58,21 @@ def runGame(startingMoney, turnNum,currentMax,currentMaxTurn):
   turn = turnNum
   maximum = currentMax
   maxTurn = currentMaxTurn
-  dieValue = throwDie()
-  if(dieValue == LUCKY_SEVEN):
+
+  #Simulates throwing two dice
+  diceValue = throwDice()
+  if(diceValue == LUCKY_SEVEN):
     moneyLeft += LUCKY_SEVEN_PRIZE
     turn += INCREMENT
     if isMax(maximum,moneyLeft):
       maximum = moneyLeft
       maxTurn = turn    
-    #print('{0:5d} {1:4d} {2:7d}'.format(turn,dieValue,moneyLeft))
+    #print('{0:5d} {1:4d} {2:7d}'.format(turn,diceValue,moneyLeft))
   else:
     moneyLeft -= INCREMENT
     turn +=INCREMENT
-    #print('{0:5d} {1:4d} {2:7d}'.format(turn,dieValue,moneyLeft))
-  return [turn,dieValue,moneyLeft,maxTurn,maximum]
+    #print('{0:5d} {1:4d} {2:7d}'.format(turn,diceValue,moneyLeft))
+  return [turn,diceValue,moneyLeft,maxTurn,maximum]
 
 def errorCheck(stringInput):
   #errorMessage = ""
@@ -109,12 +113,12 @@ def main():
     while moneyLeft > 0:
       resultList = runGame(moneyLeft,turn,maximum,maxTurn)
       turn = resultList[INDEX_OF_TURN]
-      dieValue = resultList[INDEX_OF_DIE_VALUE]
+      diceValue = resultList[INDEX_OF_DIcE_VALUE]
       moneyLeft =resultList[INDEX_OF_MONEY_LEFT]
       maxTurn = resultList[INDEX_OF_MAX_TURN]
       maximum = resultList[INDEX_OF_MAXIMUM]
       
-      print('{0:5d} {1:4d} {2:7d}'.format(turn,dieValue,moneyLeft))
+      print('{0:5d} {1:4d} {2:7d}'.format(turn,diceValue,moneyLeft))
     maxOutput = '$'+str(maximum)
     
     print("You became broke after ",turn," rolls")
