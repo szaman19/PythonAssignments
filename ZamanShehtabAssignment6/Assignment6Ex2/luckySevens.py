@@ -7,31 +7,35 @@
 
 Analysis
 
-
-(Note:  only list categories that apply)
+This program simulates a lucky sevens game where it asks for the starting bet
+and then simulates throwing dice and calculates when the pot reaches the
+highest amount. 
 
 Output to monitor:
-  variableName1 (variableType) - description
-  variableName2 (variableType) - description
-  etc.
-  (if no variable name, just describe what is output along with its type)
-Output to window: 
-  describe what is drawn, etc.
-Output to file:
-  describe what is written to file
+  turn(int) 
+  diceValue(int)
+  moneyLeft(int)
+  maxTurn(int) - The turn in which player had the most money
+  maxOutput(int) - The most money the player had during the game
   
 Input from keyboard:
-  (Note:  you can list converted variables here,
-          rather than clutter the section with
-          string versions that must be converted)
-  variableName1 (variableType) - description
-  etc.
-Tasks allocated to Functions:
-  name and description of functions that YOU write
-'''
+  potSizeIntErrorChecked - The starting bet 
 
+Tasks allocated to Functions:
+  throwDice() - Simulates throwing two dice and returns their sum 
+  isMax(currentMax,newVal) - Checks if newVal is greater than currentMax
+  runGame(startingMoney,turnNum,currentMax,currentMaxTurn) - 
+     given startingMoney, turnNum, currentMax, currentMaxTurn, calls
+     throwDice() and changes startingMoney, turnNum, currentMax, 
+     currentMaxTurn accordingly.  
+  errorCheck(stringInput) - given stringInput, checks if it is an int >0
+  horizontalPrintLine() - Creates a horizontal line on output 
+
+'''
+#Imports 
 import random
 
+#Global Constants 
 LINE_LENGTH = 19
 DICE_MIN = 1
 DICE_MAX = 7
@@ -40,10 +44,11 @@ LUCKY_SEVEN_PRIZE = 4
 INCREMENT = 1
 
 INDEX_OF_TURN = 0
-INDEX_OF_DIcE_VALUE = 1
+INDEX_OF_DICE_VALUE = 1
 INDEX_OF_MONEY_LEFT=2
 INDEX_OF_MAX_TURN = 3
 INDEX_OF_MAXIMUM = 4
+
 
 def throwDice():
   dice1 = random.randrange(DICE_MIN,DICE_MAX)
@@ -113,7 +118,7 @@ def main():
     while moneyLeft > 0:
       resultList = runGame(moneyLeft,turn,maximum,maxTurn)
       turn = resultList[INDEX_OF_TURN]
-      diceValue = resultList[INDEX_OF_DIcE_VALUE]
+      diceValue = resultList[INDEX_OF_DICE_VALUE]
       moneyLeft =resultList[INDEX_OF_MONEY_LEFT]
       maxTurn = resultList[INDEX_OF_MAX_TURN]
       maximum = resultList[INDEX_OF_MAXIMUM]

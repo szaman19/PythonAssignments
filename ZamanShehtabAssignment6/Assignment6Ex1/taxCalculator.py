@@ -2,7 +2,7 @@
 #szaman5@binghamton.edu
 #Lab Section: B55
 #CA: Nuri Ra
-#Assignment 6: Problem 3
+#Assignment 6: Problem 1
 
 '''
 The assignment goal was to create a program that is able to calculate the taxes
@@ -57,16 +57,23 @@ BRACKET_FIVE_RATE = 33
 BRACKET_SIX_RATE = 35
 BRACKET_SEVEN_RATE = 39.6
 
+#One param (string)
+#Checks whether married or not 
+#Returns bool
 def isMarried(statusString):
   lowerStatusString = statusString.lower()
   return (lowerStatusString == 'married')
-
+#Two Params
+#Returns percent value of an amount given and rate given
+#Returns float
 def percentCalculator(amount, nPercent):
   cent = 100
   nPercentAmount = ((amount / cent)*nPercent)
   return nPercentAmount
 
-  
+#Two Params (stirng, int)
+#Given marital status and taxed income, computes total tax
+#Returns float 
 def computeTax(statusString, taxedIncome):
   totalTax = 0
   
@@ -126,9 +133,16 @@ def computeTax(statusString, taxedIncome):
                  (taxedIncome-SINGLE_TAX_BRACKET_SIX,BRACKET_SEVEN_RATE)
       
   return totalTax
-def errorCheckMaritalStatus(maritalStatusString):
-  return maritalStatusString.lower()=="married" or maritalStatusString.lower()=="single"
 
+#One param
+#Checks if status string is married or single
+#Returns bool 
+def errorCheckMaritalStatus(maritalStatusString):
+  return maritalStatusString.lower()=="married" \
+  or maritalStatusString.lower()=="single"
+#One param 
+#Checks if string can be changed to float and >0
+#Returns false or float 
 def errorCheckTaxableIncome(taxableIncomeString):
   try:
     floatResult = float(taxableIncomeString)
@@ -137,12 +151,16 @@ def errorCheckTaxableIncome(taxableIncomeString):
   return floatResult < 0 or floatResult
 
   
+#Asks user for marital status and then income, checks if input is valid 
+#and outputs status, income, and tax  
 def main():
+  #Priming read 
   maritalStatus = input("What is your marital status? or <Enter to quit>")
 
-  
+  #Continuation loop
   while maritalStatus:
-
+    
+    #Validation loop - marital status
     while not errorCheckMaritalStatus(maritalStatus):
       print("Invalid marital status: Use single or married")
       maritalStatus = input("What is your marital status? or <Enter to quit>")
@@ -150,16 +168,20 @@ def main():
     taxableIncome = input("What is your taxable income? ")
     
     errorCheckedTaxableIncome = errorCheckTaxableIncome(taxableIncome)
-    
+
+    #Validation loop- taxable Income
     while not errorCheckedTaxableIncome:
       print("Invalid income. Use number greater than 0")
       taxableIncome = input("What is your taxable income? ")
       errorCheckedTaxableIncome = errorCheckTaxableIncome(taxableIncome)
-
+    
+    #Tax output 
     print("%s, $%.2f = $%.2f" % \
-     (maritalStatus,errorCheckedTaxableIncome, computeTax(maritalStatus,errorCheckedTaxableIncome))) 
+     (maritalStatus,errorCheckedTaxableIncome,\
+      computeTax(maritalStatus,errorCheckedTaxableIncome))) 
     print('\n')
     
+    #Continuation read 
     maritalStatus = input("What is your marital status? or <Enter to quit>")
 
   
