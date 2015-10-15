@@ -117,7 +117,8 @@ def main():
    
     if numOfDaysErrorCheckedInt == "Close":
       numOfDaysErrorCheckedInt = False
-
+      
+  # Custom tester according to output given on blackboard
   # tester1 = [4,14,30,365]
   # tester2 = [0.15,163.83,10737418.23,751533626487626648569070089221\
   #   4409913018813026346866355016103742446972929222333529500320616655\

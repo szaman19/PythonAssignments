@@ -3,6 +3,31 @@
 #Lab Section: B55
 #CA: Nuri Ra
 #Assignment 6: Problem 2
+'''
+
+Restate the problem
+
+(Note:  only list categories that apply)
+
+Output to monitor:
+  variableName1 (variableType) - description
+  variableName2 (variableType) - description
+  etc.
+  (if no variable name, just describe what is output along with its type)
+Output to window: 
+  describe what is drawn, etc.
+Output to file:
+  describe what is written to file
+  
+Input from keyboard:
+  (Note:  you can list converted variables here,
+          rather than clutter the section with
+          string versions that must be converted)
+  variableName1 (variableType) - description
+  etc.
+Tasks allocated to Functions:
+  name and description of functions that YOU write
+'''
 
 import random
 
@@ -20,7 +45,7 @@ INDEX_OF_MAX_TURN = 3
 INDEX_OF_MAXIMUM = 4
 def throwDie():
   dice1 = random.randrange(DICE_MIN,DICE_MAX)
-  dice2 = random.randrange(DICE_MIN,DICE_MIN)
+  dice2 = random.randrange(DICE_MIN,DICE_MAX)
   return dice1 + dice2
 
 def isMax(currentMax,newVal):
@@ -46,16 +71,16 @@ def runGame(startingMoney, turnNum,currentMax,currentMaxTurn):
   return [turn,dieValue,moneyLeft,maxTurn,maximum]
 
 def errorCheck(stringInput):
-  errorMessage = ""
+  #errorMessage = ""
   try:
     intResult = int(stringInput)
   except ValueError:
-    if stringInput =='':
-      intResult = "Close"
-    else:
-      #print("This program only takes in whole number values. Please try again")
-      intResult = "Invalid"
-  return errorMessage  or intResult
+    # if stringInput =='':
+    #   intResult = "Close"
+    # else:
+    #   #print("This program only takes in whole number values. Please try again")
+      intResult = False
+  return intResult
 
 def horizontalPrintLine():
   line = ""
@@ -68,17 +93,17 @@ def main():
   errorMessage = "This program only takes in whole number values. Please try again"
   
   potSizeStr = input(inputMessage)
-  potSizeIntErrorChecked = errorCheck(potSizeStr)
   
-  while potSizeIntErrorChecked == "Invalid":
-    print(errorMessage)
-    potSizeStr = input(inputMessage)
+  
+
+
+  while(potSizeStr):
+
     potSizeIntErrorChecked = errorCheck(potSizeStr)
-
-  if potSizeIntErrorChecked == "Close":
-    potSizeIntErrorChecked = False
-
-  while(potSizeIntErrorChecked):
+    while not potSizeIntErrorChecked:
+      print(errorMessage)
+      potSizeStr = input(inputMessage)
+      potSizeIntErrorChecked = errorCheck(potSizeStr)
     
     print('{0:5} {1:5} {2:8}'.format("Roll","Value","Dollars"))
     print(horizontalPrintLine())
@@ -103,14 +128,5 @@ def main():
     print("You should have quit after",maxTurn," rolls when you had",maxOutput,"\n")				
     
     potSizeStr = input(inputMessage)
-    potSizeIntErrorChecked = errorCheck(potSizeStr)
-
-    while potSizeIntErrorChecked == "Invalid":
-      print(errorMessage)
-      potSizeStr = input(inputMessage)
-      potSizeIntErrorChecked = errorCheck(potSizeStr)
-
-    if potSizeIntErrorChecked == "Close":
-      potSizeIntErrorChecked = False
 
 main()
