@@ -1,3 +1,38 @@
+#Zaman, M.Shehtab
+#szaman5@binghamton.edu
+#Lab Section: B55
+#CA: Nuri Ra
+#Assignment 7: Problem 1
+'''
+
+Analysis
+
+This program encrypts and decrypts messages using the caeser cipher method. 
+
+Output to monitor:
+  operationType(str) - The type of operation (Encryption or decryption) that was
+                       run
+  processedMessage(str) - The encrypted or decrypted message
+  
+Input from keyboard:
+  userInputMessage - Message to be encrypted or decrypted
+  userOperation - The type of operation for the program to run
+  userKeyConvertedInt - The key used for encryption or decryption
+
+Tasks allocated to Functions:
+  operationValidated(opStr) - validates whether opStr from user is valid
+  rotationKeyValidated(rotationKeyStr) - validates whetehr rotationKeyStr 
+    is valid
+  convertRotationKey(op,rotationKeyStr) - Converts rotationKeyStr according 
+    to the operation provied in op
+  operationType(opStr) - takes shorthand operation type and returns the 
+    complete word
+  keepInBounds(ordinal): takes ordinal and loops until ordinal is 
+     PRINTABLE_ASCII_MIN<ordinal<PRINTABLE_ASCII_LIMIT
+  processMessage(message, rotationKey) - encrypts the message using rotation
+    key and calling keepInBounds()
+'''
+
 OPERATIONS = "ed"
 ENCRYPT = 1
 DECRYPT = -1
@@ -6,8 +41,11 @@ DECRYPT = -1
 PRINTABLE_ASCII_MIN = 31
 PRINTABLE_ASCII_LIMIT = 127
 
+#Increment for ASCII range
+DELTA_MIN_LIMIT_ASCII = 95
 # Allowable rotation key prefixes
 KEY_PREFIX = "-"
+
 
 # Functions ----------------------------------------------------------------
 
@@ -59,10 +97,10 @@ def keepInBounds(ordinal):
   adjustedOrdinal = ordinal
 
   while adjustedOrdinal < PRINTABLE_ASCII_MIN:
-    adjustedOrdinal = adjustedOrdinal + 95
+    adjustedOrdinal = adjustedOrdinal + DELTA_MIN_LIMIT_ASCII
 
   while adjustedOrdinal > PRINTABLE_ASCII_LIMIT-1:
-    adjustedOrdinal -= 95
+    adjustedOrdinal -= DELTA_MIN_LIMIT_ASCII
 
   return adjustedOrdinal
 
@@ -129,7 +167,5 @@ def main():
     # Continuation read
     userInputMessage = input("Input the message to be processed\
       \n(or press <ENTER> to quit):")
-  
-
 
 main()
